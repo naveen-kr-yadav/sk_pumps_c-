@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using MotorizedMarvels.Models;
+using MotorizedMarvels.Services;
 
 namespace MotorizedMarvels.Controllers
 {
@@ -8,26 +10,25 @@ namespace MotorizedMarvels.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+          "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IWeatherService _weatherService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherService weatherService)
         {
             _logger = logger;
+            _weatherService = weatherService;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet]
+        [Route ("Weather")]
+        public async Task <IActionResult> Weather()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+           var getweather =await _weatherService.GetWeather();
+            return Ok (getweather);
         }
+        
     }
 }
