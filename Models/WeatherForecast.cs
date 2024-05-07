@@ -1,4 +1,4 @@
-namespace MotorizedMarvels
+namespace MotorizedMarvels.Models
 {
     public class WeatherForecast
     {
@@ -10,4 +10,5 @@ namespace MotorizedMarvels
 
         public string? Summary { get; set; }
     }
+
 }
