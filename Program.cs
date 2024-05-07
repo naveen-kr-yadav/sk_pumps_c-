@@ -1,8 +1,6 @@
 using MotorizedMarvels;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using System.Data.SqlClient;
+using MotorizedMarvels.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
